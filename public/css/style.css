@@ -11,13 +11,15 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: lightgrey;
+    background-image: linear-gradient(to right, #829ae8, #a1accf);
     color: black;
     padding: 10px 0;
 }
 
 header img.logo {
     max-width: 50px;
+    border-radius: 50%;
+    margin-left: 15px;
 }
 
 nav ul {
@@ -33,6 +35,14 @@ nav ul li {
 nav ul li a {
     color: black;
     text-decoration: none;
+    padding: 20px;
+    transition: color 0.6s ease, border-bottom 0.6s ease;
+    position: relative;
+}
+
+nav ul li a:hover {
+    color: #545252;
+    border-bottom: 1px solid #545252;
 }
 
 main {
@@ -40,6 +50,10 @@ main {
     padding: 20px;
     max-width: 60%;
     text-align: center;
+}
+
+section ul {
+    list-style: none;
 }
 
 .intro, .skills, .call-to-action-contact, .call-to-action-create {
@@ -52,7 +66,15 @@ main {
     background: #324ca8;
     color: white;
     text-decoration: none;
+    border: black;
     border-radius: 5px;
+    transition: background 0.6s ease, transform 0.6s ease;
+}
+
+.btn:hover {
+    background: #02035c;
+    color: white;
+    transform: scale(1.05);
 }
 
 footer {

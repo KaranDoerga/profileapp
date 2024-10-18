@@ -3,6 +3,7 @@
 <head>
     <link href="/public/css/style.css" rel="stylesheet">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
 <body>
@@ -22,7 +23,7 @@
 
 <main>
     <section class="intro">
-        <h1>Welkom op mijn website!</h1>
+        <h2>Welkom op mijn website!</h2>
         <p>Mijn naam is Karan Doerga, een enthousiaste webontwikkelaar met een passie voor het creëren van gebruiksvriendelijke en visueel aantrekkelijke websites.
         Momenteel studeer ik aan de Hogeschool Windesheim in Almere en ben bezig met de opleiding Software Development AD.
         De doel van deze website is om portfolio's te kunnen zien van verschillende mensen, waar je dan mogelijk mee kan connecten als er een interesse zit</p>
