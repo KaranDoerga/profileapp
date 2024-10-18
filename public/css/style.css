@@ -75,6 +75,7 @@ section ul {
     background: #02035c;
     color: white;
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 footer {
