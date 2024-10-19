@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Zorg dat alleen niet-bestaande bestanden/directory's worden herschreven
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#Herschrijf alle verzoeken naar index.php
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

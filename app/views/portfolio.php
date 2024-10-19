@@ -12,11 +12,11 @@
     <img src="/public/images/images.png" alt="Logo" class="logo">
     <nav>
         <ul>
-            <li><a href="#" id="home">Home</a></li>
-            <li><a href="#" id="portfolio">Portfolio's</a></li>
-            <li><a href="#" id="about">About</a></li>
-            <li><a href="#" id="login">Login</a></li>
-            <li><a href="#" id="contact">Contact</a></li>
+            <li><a href="../views/home.php" id="home">Home</a></li>
+            <li><a href="../views/portfolio.php" id="portfolio">Portfolio's</a></li>
+            <li><a href="../views/about.php" id="about">About</a></li>
+            <li><a href="../views/auth.php" id="login">Login</a></li>
+            <li><a href="../views/contact.php" id="contact">Contact</a></li>
         </ul>
     </nav>
 </header>

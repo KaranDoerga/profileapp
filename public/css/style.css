@@ -81,7 +81,7 @@ section ul {
 footer {
     display: flex;
     justify-content: center;
-    background: lightgrey;
+    background-image: linear-gradient(to right, #829ae8, #a1accf);
     color: black;
     padding: 10px 0;
     position: relative;

@@ -12,11 +12,11 @@
     <img src="/public/images/images.png" alt="Logo" class="logo">
     <nav>
         <ul>
-            <li><a href="#" id="home">Home</a></li>
-            <li><a href="#" id="portfolio">Portfolio's</a></li>
-            <li><a href="#" id="about">About</a></li>
-            <li><a href="#" id="login">Login</a></li>
-            <li><a href="#" id="contact">Contact</a></li>
+            <li><a href="../views/home.php" id="home">Home</a></li>
+            <li><a href="../views/portfolio.php" id="portfolio">Portfolio's</a></li>
+            <li><a href="../views/about.php" id="about">About</a></li>
+            <li><a href="../views/auth.php" id="login">Login</a></li>
+            <li><a href="../views/contact.php" id="contact">Contact</a></li>
         </ul>
     </nav>
 </header>
@@ -40,14 +40,14 @@
 
     <section class="call-to-action-contact">
         <h2>Neem contact op!</h2>
-        <p>Ben je geïnteresseerd in een samenwerking of heb je vragen? Neem contact met me op via de <a href="/contact">contactpagina</a>.</p>
-        <a href="/contact" class="btn">Contacteer Mij</a>
+        <p>Ben je geïnteresseerd in een samenwerking of heb je vragen? Neem contact met me op via de <a href="../views/contact.php">contactpagina</a>.</p>
+        <a href="../views/contact.php" class="btn">Contacteer Mij</a>
     </section>
 
     <section class="call-to-action-create">
         <h2>Plaats jouw eigen portfolio!</h2>
-        <p>Wil jij jouw portfolio delen met de buiten wereld? Plaats dan jouw portfolio via de <a href="portfolio.php">portfoliopagina</a>.</p>
-        <a href="/portfolio" class="btn">Ga naar portfolio</a>
+        <p>Wil jij jouw portfolio delen met de buiten wereld? Plaats dan jouw portfolio via de <a href="../views/portfolio.php">portfoliopagina</a>.</p>
+        <a href="../views/portfolio.php" class="btn">Ga naar portfolio</a>
     </section>
 </main>
 
