@@ -28,23 +28,19 @@
 
         <!--Lijst van projecten-->
         <div class="project-list">
-            <?php
-            //Voorbeeld van projectoinformatie
-            $projects = [
-                1 => ['title' => 'Project 1', 'description' => 'Dit is een kort overzicht van Project 1.', 'image' => '/public/images/project1.jpg'],
-                2 => ['title' => 'Project 2', 'description' => 'Dit is een kort overzicht van Project 2.', 'image' => '/public/images/project2.jpg']
-            ];
-
-            foreach ($projects as $id => $project) {
-                echo "
-                <div class='project-item'>
-                    <img src='{$project['image']}' alt='{$project['title']}'>
-                    <h3>{$project['title']}</h3>
-                    <p>{$project['description']}</p>
-                    <button class='view-details-btn' data-project-id='$id'>Bekijk Details</button>
-                </div>";
-            }
-            ?>
+            <?php if (!empty($projects)): ?>
+                <?php foreach ($projects as $project): ?>
+                    <div class='project-item'>
+                        <img src='<?= $project['link_image']; ?>' alt='<?= $project['title']; ?>'>
+                        <h3><?= $project['title']; ?></h3>
+                        <p><?= $project['beschrijving']; ?></p>
+                        <p>Programmeertaal: <?= $project['pro_lang']; ?></p>
+                        <button class='view-details-btn' data-project-id='<?= $project['id']; ?>'>Bekijk Details</button>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Geen projecten gevonden.</p>
+            <?php endif; ?>
         </div>
     </section>
 
