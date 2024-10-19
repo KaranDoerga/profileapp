@@ -2,7 +2,7 @@
 
 //Open en sluit de modals
 document.getElementById('open-add-project-modal').addEventListener('click', function () {
-    document.getElementById('add-project-modal').style.display = 'block';
+    document.getElementById('add-project-modal').style.display = 'flex';
 });
 
 document.getElementById('close-add-project').addEventListener('click', function () {
@@ -31,7 +31,7 @@ document.querySelector('.view-details-btn').forEach(function (button) {
         }
 
         //Toon de modal
-        document.getElementById('project-detail-modal').style.display = 'block';
+        document.getElementById('project-detail-modal').style.display = 'flex';
     })
 })
 
