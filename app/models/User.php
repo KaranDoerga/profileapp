@@ -4,15 +4,30 @@ class User {
     private $db;
 
     public function __construct($db) {
-        $this->db = connectDB();
+        $this->db = $db;
     }
 
     // Functie om een gebruiker aan te maken
     public function createUser($first_name, $last_name, $email, $password, $profile_image = null) {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $sql = "insert into Users (first_name, last_name, email, password, profile_image) values (?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$first_name, $last_name, $email, $hashedPassword, $profile_image]);
+
+        // Bouw query dynamisch op afhankelijk van of er een profielafbeelding is
+        if ($profile_image) {
+            $sql = "INSERT INTO Users (first_name, last_name, email, password, profile_image) VALUES (?, ?, ?, ?, ?)";
+            $params = [$first_name, $last_name, $email, $hashedPassword, $profile_image];
+        } else {
+            $sql = "INSERT INTO Users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+            $params = [$first_name, $last_name, $email, $hashedPassword];
+        }
+
+        // Voer de query uit met de juiste parameters
+        try {
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute($params);
+        } catch (PDOException $e) {
+            // Foutafhandeling, bijv. loggen van fout
+            echo "Error: " . $e->getMessage();
+        }
     }
 
     public function getUserById($id) {

@@ -1,6 +1,6 @@
 //script.js
 
-//Open en sluit de modals
+//Open en sluit de add-project-modal
 document.getElementById('open-add-project-modal').addEventListener('click', function () {
     document.getElementById('add-project-modal').style.display = 'flex';
 });
@@ -34,7 +34,29 @@ document.querySelector('.view-details-btn').forEach(function (button) {
         document.getElementById('project-detail-modal').style.display = 'flex';
     })
 })
-
 document.getElementById('close-project-detail').addEventListener('click', function () {
     document.getElementById('project-detail-modal').style.display = 'none';
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Profiel modal functionaliteit
+    const profileBtn = document.querySelector('.profile-btn');
+    const profileModal = document.getElementById('profile-modal');
+    const closeProfileModal = document.getElementById('close-profile-modal');
+
+    if (profileBtn) {
+        profileBtn.addEventListener('click', function () {
+            profileModal.style.display = 'flex';
+        });
+    }
+
+    closeProfileModal.addEventListener('click', function () {
+        profileModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target === profileModal) {
+            profileModal.style.display = 'none';
+        }
+    })
 })

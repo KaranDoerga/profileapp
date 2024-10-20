@@ -4,7 +4,7 @@ class Project {
     private $db;
 
     public function __construct($db) {
-        $this->db = connectDB();
+        $this->db = $db;
     }
 
     public function createProject($user_id, $title, $description, $link_image, $pro_lang) {

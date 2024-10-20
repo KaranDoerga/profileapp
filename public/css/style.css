@@ -11,7 +11,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: linear-gradient(to right, #829ae8, #a1accf);
+    background-image: linear-gradient(to right, #829ae8, #e2ccf8);
     color: black;
     padding: 10px 0;
 }
@@ -81,7 +81,7 @@ section ul {
 footer {
     display: flex;
     justify-content: center;
-    background-image: linear-gradient(to right, #829ae8, #a1accf);
+    background-image: linear-gradient(to right, #829ae8, #e2ccf8);
     color: black;
     padding: 10px 0;
     position: relative;

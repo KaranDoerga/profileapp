@@ -1,3 +1,10 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -44,23 +51,27 @@
         </div>
     </section>
 
+    <?php if (isset($_SESSION['user_id'])): ?>
     <!-- Knop om een nieuw project toe te voegen -->
     <button id="open-add-project-modal" class="btn">Project Toevoegen</button>
+    <?php else: ?>
+    <p>Je moet ingelogd zijn om een project aan te kunnen maken</p>
+    <?php endif; ?>
 
     <!--Modal voor het aanmaken van een project-->
     <div id="add-project-modal" class="modal">
         <div class="modal-content">
             <span class="close" id="close-add-project">&times;</span>
             <h2>Nieuw project aanmaken</h2>
-            <form id="add-project-form" action="/project" method="post" enctype="multipart/form-data">
+            <form id="add-project-form" action="../controllers/PortfolioController.php" method="post" enctype="multipart/form-data">
                 <label for="title">Titel</label>
                 <input type="text" id="title" name="title" required>
 
                 <label for="description">Beschrijving</label>
                 <textarea id="description" name="description" required></textarea>
 
-                <label for="experiences">Ervaringen</label>
-                <input type="text" id="experiences" name="experiences" required>
+                <label for="pro_lang">Programmeertalen</label>
+                <input type="text" id="pro_lang" name="pro_lang" required>
 
                 <label for="image">Afbeelding uploaden</label>
                 <input type="file" id="image" name="image">
@@ -76,7 +87,7 @@
             <span class="close" id="close-project-detail">&times;</span>
             <h2 id="modal-title">Project Titel</h2>
             <p id="modal-description">Project beschrijving...</p>
-            <p id="modal-experiences">Ervaringen</p>
+            <p id="modal-pro_lang">Programmeertalen</p>
             <img id="modal-image" src="" alt="Project Afbeelding">
         </div>
     </div>
