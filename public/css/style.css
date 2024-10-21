@@ -54,10 +54,12 @@ main {
 
 section ul {
     list-style: none;
+    padding: 0;
 }
 
 .intro, .skills, .call-to-action-contact, .call-to-action-create {
     margin-bottom: 20px;
+    min-height: 150px;
 }
 
 .btn {

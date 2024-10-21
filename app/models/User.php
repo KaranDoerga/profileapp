@@ -1,46 +1,35 @@
 <?php
 
-class User {
-    private $db;
+class User extends Model {
 
-    public function __construct($db) {
-        $this->db = $db;
-    }
+    // Registreren van een nieuwe gebruiker
+    public function register($first_name, $last_name, $email, $password) {
+        $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (:first_name, :last_name, :email, :password)";
+        $stmt = $this->db->prepare($sql);
 
-    // Functie om een gebruiker aan te maken
-    public function createUser($first_name, $last_name, $email, $password, $profile_image = null) {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $stmt->bindParam(':first_name', $first_name);
+        $stmt->bindParam(':last_name', $last_name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashedPassword);
 
-        // Bouw query dynamisch op afhankelijk van of er een profielafbeelding is
-        if ($profile_image) {
-            $sql = "INSERT INTO Users (first_name, last_name, email, password, profile_image) VALUES (?, ?, ?, ?, ?)";
-            $params = [$first_name, $last_name, $email, $hashedPassword, $profile_image];
-        } else {
-            $sql = "INSERT INTO Users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
-            $params = [$first_name, $last_name, $email, $hashedPassword];
-        }
-
-        // Voer de query uit met de juiste parameters
-        try {
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute($params);
-        } catch (PDOException $e) {
-            // Foutafhandeling, bijv. loggen van fout
-            echo "Error: " . $e->getMessage();
-        }
+        return $stmt->execute();
     }
 
-    public function getUserById($id) {
-        $sql = "select * from Users where id = ?";
+    // Inloggen door email en wachtwoord te controleren
+    public function login($email, $password) {
+        $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
 
-    public function getUserByEmail($email) {
-        $sql = "select * from Users where email = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$email]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Controleer wachtwoord en start sessie
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            return true;
+        }
+        return false;
     }
 }

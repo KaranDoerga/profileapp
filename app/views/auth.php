@@ -53,7 +53,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 <?php endif; ?>
             </form>
         </section>
-
+        <!-- Register Sectie -->
         <section id="register-section">
             <h2>Registreren</h2>
             <form action="/index.php?url=register" method="post">
