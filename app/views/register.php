@@ -1,17 +1,11 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-?>
-
-
 <!doctype html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/auth.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
+    <title>Register</title>
 </head>
 <body>
 
@@ -37,22 +31,27 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <main>
     <div class="container">
-        <section id="contact-section">
-            <h2>Contact</h2>
-            <form action="/index.php?url=contact" method="post">
-                <label for="name">Naam:</label>
-                <input type="text" id="name" name="name" placeholder="Naam" required>
+        <!-- Register Sectie -->
+        <section id="register-section">
+            <h2>Registreren</h2>
+            <form action="/register" method="post">
+                <label for="first_name">Voornaam:</label>
+                <input type="text" name="first_name" id="first_name" required>
+
+                <label for="last_name">Achternaam:</label>
+                <input type="text" name="last_name" id="last_name" required>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="email" name="email" id="email" required>
 
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" cols="5"></textarea>
+                <label for="password">Wachtwoord:</label>
+                <input type="password" name="password" id="password" required>
 
-                <button type="submit" name="contact" class="btn">Verzenden</button>
+                <button type="submit" name="register" class="btn">Registreren</button>
             </form>
         </section>
     </div>
+
 </main>
 
 <footer>

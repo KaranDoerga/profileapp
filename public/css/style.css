@@ -52,6 +52,35 @@ main {
     text-align: center;
 }
 
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 500px;
+    margin: 50px auto;
+}
+
+.container section {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 0 10px;
+    background-color: white;
+}
+
+/* Formuliervelden Styling */
+.container input[type="email"],
+.container input[type="password"],
+.container input[type="text"],
+.container textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
 section ul {
     list-style: none;
     padding: 0;
@@ -86,7 +115,7 @@ footer {
     background-image: linear-gradient(to right, #829ae8, #e2ccf8);
     color: black;
     padding: 10px 0;
-    position: relative;
+    position: absolute;
     bottom: 0;
     width: 100%;
 }

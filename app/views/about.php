@@ -22,8 +22,15 @@ if (session_status() == PHP_SESSION_NONE) {
             <li><a href="../views/home.php" id="home">Home</a></li>
             <li><a href="../views/portfolio.php" id="portfolio">Portfolio's</a></li>
             <li><a href="../views/about.php" id="about">About</a></li>
-            <li><a href="../views/auth.php" id="login">Login</a></li>
             <li><a href="../views/contact.php" id="contact">Contact</a></li>
+
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="#" id="profile" class="profile-btn">Mijn Profiel</a></li>
+                <li><form method="post" action="login.php"><button type="submit" name="logout" class="logout-btn">Logout</button></form></li>
+            <?php else: ?>
+                <li><a href="login.php" id="login">Login</a></li>
+                <li><a href="../views/register.php" id="register">Register</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
 </header>

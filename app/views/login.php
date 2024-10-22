@@ -11,7 +11,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <link rel="stylesheet" href="/public/css/auth.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Register</title>
+    <title>Login</title>
 </head>
 <body>
 
@@ -26,21 +26,22 @@ if (session_status() == PHP_SESSION_NONE) {
 
             <?php if (isset($_SESSION['user_id'])): ?>
                 <li><a href="#" id="profile" class="profile-btn">Mijn Profiel</a></li>
-                <li><form method="post" action="auth.php"><button type="submit" name="logout" class="logout-btn">Logout</button></form></li>
+                <li><form method="post" action="login.php"><button type="submit" name="logout" class="logout-btn">Logout</button></form></li>
             <?php else: ?>
-            <li><a href="../views/auth.php" id="login">Login</a></li>
+                <li><a href="login.php" id="login">Login</a></li>
+                <li><a href="../views/register.php" id="register">Register</a></li>
             <?php endif; ?>
         </ul>
     </nav>
 </header>
 
 <main>
-    <div class="auth-container">
+    <div class="container">
         <!-- Login Sectie -->
         <section id="login-section">
             <h2>Inloggen</h2>
             <form action="/login" method="post">
-                <label for="email">E-mail:</label>
+                <label for="email">Email:</label>
                 <input type="email" name="email" id="email" required>
 
                 <label for="password">Wachtwoord:</label>
@@ -51,25 +52,6 @@ if (session_status() == PHP_SESSION_NONE) {
                 <?php if (isset($error)): ?>
                     <p class="error-message"><?= $error ?></p>
                 <?php endif; ?>
-            </form>
-        </section>
-        <!-- Register Sectie -->
-        <section id="register-section">
-            <h2>Registreren</h2>
-            <form action="/register" method="post">
-                <label for="first_name">Voornaam:</label>
-                <input type="text" name="first_name" id="first_name" required>
-
-                <label for="last_name">Achternaam:</label>
-                <input type="text" name="last_name" id="last_name" required>
-
-                <label for="email">E-mail:</label>
-                <input type="email" name="email" id="email" required>
-
-                <label for="password">Wachtwoord:</label>
-                <input type="password" name="password" id="password" required>
-
-                <button type="submit" name="register" class="btn">Registreren</button>
             </form>
         </section>
     </div>

@@ -2,7 +2,7 @@
     <div class="modal-content">
         <span class="close" id="close-profile-modal">&times;</span>
         <h2>Mijn Profiel</h2>
-        <form method="post" action="auth.php">
+        <form method="post" action="login.php">
             <label for="first_name">Voornaam</label>
             <input type="text" id="first_name" name="first_name" value="<?= $_SESSION['first_name']; ?>" required>
 
