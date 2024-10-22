@@ -3,33 +3,60 @@
 namespace models;
 
 use core\Model;
-use PDO;
 
-class User extends Model {
+class User {
 
-    // Registreren van een nieuwe gebruiker
-    public function register($first_name, $last_name, $email, $password) {
-        $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (:first_name, :last_name, :email, :password)";
-        $stmt = $this->db->prepare($sql);
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $stmt->bindParam(':first_name', $first_name);
-        $stmt->bindParam(':last_name', $last_name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hashedPassword);
-        return $stmt->execute();
+    private $db;
+
+    public function __construct() {
+        $this->db = new Model();
     }
 
-    // Inloggen door email en wachtwoord te controleren
-    public function login($email, $password) {
-        $sql = "SELECT * FROM users WHERE email = :email";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    //Find user by email address
+    public function findByEmail($email) {
+        $this->db->query("SELECT * FROM users WHERE email = :email");
+        $this->db->bind(":email", $email);
 
-        if ($user && password_verify($password, $user['password'])) {
-            return $user; // Retourneer de gebruiker als login succesvol is
+        $row = $this->db->single();
+
+        // Check row
+        if ($this->db->rowCount() > 0) {
+            return $row;
+        } else {
+            return false;
         }
-        return false;
+    }
+
+    // Register user
+    public function register($data) {
+        $this->db->query("INSERT INTO users (first_name, last_name, email, password) 
+        VALUES (:first_name, :last_name, :email, :password)");
+
+        // Bind values
+        $this->db->bind(":first_name", $data['first_name']);
+        $this->db->bind(":last_name", $data['last_name']);
+        $this->db->bind(":email", $data['email']);
+        $this->db->bind(":password", $data['password']);
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Login user
+    public function login($email, $password) {
+        $row = $this->findByEmail($email);
+
+        if ($row == false) return false;
+
+        $hashedPassword = $row->password;
+        if (password_verify($password, $hashedPassword)) {
+            return $row;
+        } else {
+            return false;
+        }
     }
 }
