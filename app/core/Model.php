@@ -1,11 +1,16 @@
 <?php
-
-class Model {
+// Model.php
+namespace core;
+use PDO;
+use PDOException;
+class Model
+{
 
     protected $db;
 
-    // Constructor om de databaseverbinding op te zetten
-    public function __construct() {
+    // Constructor to set up the database connection
+    public function __construct()
+    {
         $dsn = 'mysql:host=localhost;dbname=profileapp;charset=utf8';
         $username = 'root';
         $password = 'root';
@@ -22,4 +27,11 @@ class Model {
         }
     }
 
+    // Function to get the database connection instance
+    public function getDB()
+    {
+        return $this->db;
+    }
 }
+
+?>

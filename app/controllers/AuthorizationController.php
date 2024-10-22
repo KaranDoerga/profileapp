@@ -1,6 +1,9 @@
 <?php
 
-class AuthController extends Controller {
+namespace App\Http\Controllers;
+use core\Controller;
+
+class AuthorizationController extends Controller {
 
     //Login functie
     public function login() {

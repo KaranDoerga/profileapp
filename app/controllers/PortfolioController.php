@@ -1,5 +1,7 @@
 <?php
 
+use core\Controller;
+
 class PortfolioController extends Controller{
 
     public function createProject() {

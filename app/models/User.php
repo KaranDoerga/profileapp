@@ -1,6 +1,25 @@
 <?php
 
+namespace models;
+
+use core\Model;
+
 class User extends Model {
+
+    public function getUserByEmail($email) {
+        $sql = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([":email" => $email]);
+        $user = $stmt->fetch();
+    }
+
+    // Fetch user details based on email
+//$sql = "SELECT * FROM users WHERE email = :email";
+//$stmt = $pdo->prepare($sql);
+//$stmt->execute([':email' => $email]);
+//$user = $stmt->fetch();
+
+
 
     // Registreren van een nieuwe gebruiker
     public function register($first_name, $last_name, $email, $password) {
@@ -14,22 +33,5 @@ class User extends Model {
         $stmt->bindParam(':password', $hashedPassword);
 
         return $stmt->execute();
-    }
-
-    // Inloggen door email en wachtwoord te controleren
-    public function login($email, $password) {
-        $sql = "SELECT * FROM users WHERE email = :email";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Controleer wachtwoord en start sessie
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            return true;
-        }
-        return false;
     }
 }
