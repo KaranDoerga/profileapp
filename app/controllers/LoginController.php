@@ -1,34 +1,41 @@
 <?php
 // login.php
+
+namespace controllers;
+
 require '../core/Model.php';
+require '../core/Controller.php';
 
-use core\Model;
+use core\Controller;
+use models\User;
 
-// Create an instance of the Model class
-$model = new Model();
-$pdo = $model->getDB();
+class LoginController extends Controller{
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
 
-    // Fetch user details based on email
-    $sql = "SELECT * FROM users WHERE email = :email";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([':email' => $email]);
-    $user = $stmt->fetch();
+            // Maak een instantie van de User class
+            $userModel = new User();
 
-    if ($user && password_verify($password, $user['password'])) {
-        // Password is correct, start a session
-        session_start();
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['email'] = $user['email'];
+            // Gebruik de login-functie van de User class
+            $user = $userModel->login($email, $password);
 
-        echo "Login successful!";
-        // Redirect to a protected page (optional)
-        header("Location: /dashboard.php");
-    } else {
-        $error = "Invalid email or password!";
+            if ($user) {
+                session_start();
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['email'] = $user['email'];
+
+                header('Location: /dashboard.php');
+                exit();
+            } else {
+                $data['error'] = 'Invalid email or password!';
+                $this->view('auth', $data);
+            }
+        } else {
+            $this->view('auth');
+        }
     }
 }
 ?>

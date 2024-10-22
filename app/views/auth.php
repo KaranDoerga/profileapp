@@ -39,7 +39,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <!-- Login Sectie -->
         <section id="login-section">
             <h2>Inloggen</h2>
-            <form action="/controllers/LoginController.php" method="post">
+            <form action="/login" method="post">
                 <label for="email">E-mail:</label>
                 <input type="email" name="email" id="email" required>
 
@@ -56,7 +56,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <!-- Register Sectie -->
         <section id="register-section">
             <h2>Registreren</h2>
-            <form action="/app/controllers/AuthorizationController.php" method="post">
+            <form action="/register" method="post">
                 <label for="first_name">Voornaam:</label>
                 <input type="text" name="first_name" id="first_name" required>
 
