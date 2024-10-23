@@ -4,6 +4,8 @@ namespace models;
 
 use core\Model;
 
+require_once '../core/Model.php';
+
 class User {
 
     private $db;

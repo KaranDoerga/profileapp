@@ -27,7 +27,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
             <?php if (isset($_SESSION['user_id'])): ?>
                 <li><a href="#" id="profile" class="profile-btn">Mijn Profiel</a></li>
-                <li><form method="post" action="login.php"><button type="submit" name="logout" class="logout-btn">Logout</button></form></li>
+                <li><a href="../controllers/LoginController.php?q=logout">Logout</a></li>
             <?php else: ?>
                 <li><a href="login.php" id="login">Login</a></li>
                 <li><a href="../views/register.php" id="register">Register</a></li>

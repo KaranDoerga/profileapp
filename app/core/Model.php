@@ -26,15 +26,24 @@ class Model {
         // Create PDO instance
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->password, $options);
+            // Optioneel: Echo voor debuggen
+            echo "Database connection successful!";
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
-            echo $this->error;
+            // Optioneel: Echo foutmelding
+            echo "Database connection failed: " . $this->error;
+            $this->dbh = null; // Zorg ervoor dat $dbh null is als het niet lukt
         }
     }
 
     // Prepare statement with query
+    // Prepare statement with query
     public function query($sql) {
-        $this->stmt = $this->dbh->prepare($sql);
+        if ($this->dbh) {
+            $this->stmt = $this->dbh->prepare($sql);
+        } else {
+            echo("Database connection not initialized!");
+        }
     }
 
     // Bind values, to prepared statement using named parameters
