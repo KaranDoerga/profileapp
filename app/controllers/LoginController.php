@@ -76,8 +76,15 @@ class LoginController {
             $loggedInUser = $this->userModel->login($data['email'], $data['password']);
             if($loggedInUser) {
                 // Create session
-
+                $this->createUserSession($loggedInUser);
+                redirect("../index.php");
+            } else {
+                alert("login", "Wachtwoord onjuist!");
+                redirect("../login.php");
             }
+        } else {
+            alert("login", "Geen gebruiker gevonden!");
+            redirect("../login.php");
         }
     }
 

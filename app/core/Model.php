@@ -37,7 +37,6 @@ class Model {
     }
 
     // Prepare statement with query
-    // Prepare statement with query
     public function query($sql) {
         if ($this->dbh) {
             $this->stmt = $this->dbh->prepare($sql);
