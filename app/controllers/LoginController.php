@@ -29,18 +29,18 @@ class LoginController {
         if (empty($data['first_name']) || empty($data['last_name']) ||
             empty($data['email']) || empty($data['password'])) {
             alert("register", "Vul alle gegevens in!");
-            redirect("../register.php");
+            redirect("../views/register.php");
         }
 
         // Validate email
         if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             alert("register", "Ongeldige e-mailadres!");
-            redirect("../register.php");
+            redirect("../views/register.php");
         }
 
         if ($this->userModel->findByEmail($data['email'])) {
             alert("register", "E-mail adres bestaat al!");
-            redirect("../register.php");
+            redirect("../view/register.php");
         }
 
         // Passed all validation checks
@@ -48,7 +48,7 @@ class LoginController {
 
         // Register user
         if ($this->userModel->register($data)) {
-            redirect("../login.php");
+            redirect("../views/login.php");
         } else {
             die("Er is iets fout gegaan!");
         }
@@ -66,7 +66,7 @@ class LoginController {
         // Validate if inputs are empty
         if (empty($data['email']) || empty($data['password'])) {
             alert("login", "Vul email en wachtwoord in");
-            header("location: login.php");
+            header("location: ../views/login.php");
             exit;
         }
 
@@ -77,26 +77,28 @@ class LoginController {
             if($loggedInUser) {
                 // Create session
                 $this->createUserSession($loggedInUser);
-                redirect("../index.php");
+                redirect("../views/home.php");
             } else {
                 alert("login", "Wachtwoord onjuist!");
-                redirect("../login.php");
+                redirect("../views/login.php");
             }
         } else {
             alert("login", "Geen gebruiker gevonden!");
-            redirect("../login.php");
+            redirect("../views/login.php");
         }
     }
 
     public function createUserSession($user) {
+        $_SESSION['users_id'] = $user->users_id;
         $_SESSION['email'] = $user->email;
-        redirect("../index.php");
+        redirect("../views/home.php");
     }
 
     public function logout() {
+        unset($_SESSION['users_id']);
         unset($_SESSION['email']);
         session_destroy();
-        redirect("../index.php");
+        redirect("../views/home.php");
     }
 }
 
@@ -112,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->login();
             break;
         default:
-            redirect("../index.php");
+            redirect("../views/home.php");
     }
 } else {
     switch ($_GET['q']) {
@@ -120,6 +122,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $init->logout();
             break;
         default:
-            redirect("../index.php");
+            redirect("../views/home.php");
     }
 }

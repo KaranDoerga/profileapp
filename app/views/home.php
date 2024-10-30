@@ -1,7 +1,5 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
 ?>
 
 
@@ -23,13 +21,12 @@ if (session_status() == PHP_SESSION_NONE) {
             <li><a href="../views/portfolio.php" id="portfolio">Portfolio's</a></li>
             <li><a href="../views/about.php" id="about">About</a></li>
             <li><a href="../views/contact.php" id="contact">Contact</a></li>
-
-            <?php if (isset($_SESSION['user_id'])): ?>
-                <li><a href="#" id="profile" class="profile-btn">Mijn Profiel</a></li>
-                <li><a href="../controllers/LoginController.php?q=logout">Logout</a></li>
-            <?php else: ?>
+            <?php if (!isset($_SESSION['users_id'])): ?>
                 <li><a href="login.php" id="login">Login</a></li>
                 <li><a href="../views/register.php" id="register">Register</a></li>
+            <?php else: ?>
+                <li><a href="#" id="profile" class="profile-btn">Mijn Profiel</a></li>
+                <li><a href="../controllers/LoginController.php?q=logout">Logout</a></li>
             <?php endif; ?>
         </ul>
     </nav>
