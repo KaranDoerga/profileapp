@@ -40,7 +40,7 @@ class LoginController {
 
         if ($this->userModel->findByEmail($data['email'])) {
             alert("register", "E-mail adres bestaat al!");
-            redirect("../view/register.php");
+            redirect("../views/register.php");
         }
 
         // Passed all validation checks
@@ -71,26 +71,33 @@ class LoginController {
         }
 
         // Check for email
+        echo "Checking for email...<br>";
         if($this->userModel->findByEmail($data['email'])) {
+            echo "User found, attempting login...<br>";
             // User found
             $loggedInUser = $this->userModel->login($data['email'], $data['password']);
             if($loggedInUser) {
+                echo "Login succesful, creating session...<br>";
                 // Create session
                 $this->createUserSession($loggedInUser);
                 redirect("../views/home.php");
             } else {
+                echo "Incorrect password.<br>";
                 alert("login", "Wachtwoord onjuist!");
                 redirect("../views/login.php");
             }
         } else {
+            echo "No user found.<br>";
             alert("login", "Geen gebruiker gevonden!");
             redirect("../views/login.php");
         }
     }
 
     public function createUserSession($user) {
-        $_SESSION['users_id'] = $user->users_id;
+        $_SESSION['users_id'] = $user->id;
         $_SESSION['email'] = $user->email;
+
+        echo "Session created with user_id: " . $_SESSION['users_id'] . "<br>";
         redirect("../views/home.php");
     }
 

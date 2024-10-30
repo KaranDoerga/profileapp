@@ -1,28 +1,57 @@
 <?php
 
-use core\Controller;
+namespace controllers;
 
-class PortfolioController extends Controller{
+use models\Project;
 
-    public function createProject() {
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $projectModel = new Project(connectDB());
-            $userId = 1; // De ingelogde gebruiker (dummy ID voor nu)
+require_once "../models/Project.php";
+require_once "../helpers/helper.php";
 
-            // Verwerk het formulier
-            $title = $_POST["title"];
-            $description = $_POST["description"];
-            $pro_lang = $_POST["pro_lang"];
-            $link_image = $_FILES["link_image"]["name"];
+class PortfolioController{
 
-            move_uploaded_file($_FILES["link_image"]["tmp_name"], "../public/img/" . $link_image);
+    private $projectModel;
 
-            $projectModel->createProject($userId, $title, $description, $pro_lang, $link_image);
+    public function __construct(){
+        $this->projectModel = new Project();
+    }
 
-            header('Location: /portfolio.php');
+    public function getProjects(){
+        $projects = $this->projectModel->getProjects();
+        require_once "../views/portfolio.php";
+    }
+
+    public function addProject() {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+
+        $data = [
+            'users_id' => trim($_SESSION['users_id']),
+            'title' => trim($_POST['title']),
+            'beschrijving' => trim($_POST['beschrijving']),
+            'link_image' => trim($_POST['link_image']),
+            'pro_lang' => trim($_POST['pro_lang']),
+        ];
+
+        // Validate inputs
+        if (empty($data['title']) || empty($data['beschrijving']) || empty($data['link_image'])) {
+            alert("portfolio", "Vul alle velden in!");
+            redirect("../views/portfolio.php");
         }
 
+        // Post Project
+        if ($this->projectModel->createProject($data)) {
+            redirect("../views/portfolio.php");
+        } else {
+            die("Er is iets fout gegaan!");
+        }
     }
+}
+
+$init = new PortfolioController();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $init->addProject();
+} else {
+    $init->getProjects();
 }
 
 ?>

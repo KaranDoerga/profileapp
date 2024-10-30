@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../models/Project.php"
 ?>
 
 
@@ -56,7 +57,7 @@ session_start();
         </div>
     </section>
 
-    <?php if (isset($_SESSION['user_id'])): ?>
+    <?php if (isset($_SESSION['users_id'])): ?>
     <!-- Knop om een nieuw project toe te voegen -->
     <button id="open-add-project-modal" class="btn">Project Toevoegen</button>
     <?php else: ?>
@@ -69,6 +70,7 @@ session_start();
             <span class="close" id="close-add-project">&times;</span>
             <h2>Nieuw project aanmaken</h2>
             <form id="add-project-form" action="../controllers/PortfolioController.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="type" value="project">
                 <label for="title">Titel</label>
                 <input type="text" id="title" name="title" required>
 
@@ -76,7 +78,16 @@ session_start();
                 <textarea id="description" name="description" required></textarea>
 
                 <label for="pro_lang">Programmeertalen</label>
-                <input type="text" id="pro_lang" name="pro_lang" required>
+                <select name="pro_lang" id="pro_lang" required>
+                    <option value="python">Python</option>
+                    <option value="javascript">Javascript</option>
+                    <option value="java">Java</option>
+                    <option value="c#">C#</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="php">PHP</option>
+                    <option value="c++">C++</option>
+                    <option value="go">Go</option>
+                </select>
 
                 <label for="image">Afbeelding uploaden</label>
                 <input type="file" id="image" name="image">
