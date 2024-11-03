@@ -32,21 +32,31 @@ session_start();
     </nav>
 </header>
 
+<h1 id="index-text">Welkom, <?php if(isset($_SESSION['user_id'])){
+        echo explode(" ", $_SESSION['first_name'])[0];
+    }else{
+        echo 'Bezoeker';
+    }
+    ?> </h1>
+
 <main>
     <div class="container">
         <section id="contact-section">
             <h2>Contact</h2>
-            <form action="/index.php?url=contact" method="post">
-                <label for="name">Naam:</label>
-                <input type="text" id="name" name="name" placeholder="Naam" required>
+            <form action="../controllers/ContactController.php" method="post">
+                <label for="name">Volledige naam:</label>
+                <input type="text" id="name" name="name" placeholder="Volledige naam" required>
 
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Email" required>
 
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" cols="5"></textarea>
+                <label for="subject">Onderwerp:</label>
+                <input type="text" id="subject" name="subject" placeholder="Onderwerp" required>
 
-                <button type="submit" name="contact" class="btn">Verzenden</button>
+                <label for="message">Bericht:</label>
+                <textarea id="message" name="message" placeholder="Bericht" rows="4" cols="5"></textarea>
+
+                <button type="submit" name="submit" class="btn">Verzenden</button>
             </form>
         </section>
     </div>

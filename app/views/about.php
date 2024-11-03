@@ -32,6 +32,13 @@ session_start();
     </nav>
 </header>
 
+<h1 id="index-text">Welkom, <?php if(isset($_SESSION['user_id'])){
+        echo explode(" ", $_SESSION['first_name'])[0];
+    }else{
+        echo 'Bezoeker';
+    }
+    ?> </h1>
+
 <main>
 
 </main>

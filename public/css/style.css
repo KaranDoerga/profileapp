@@ -22,6 +22,10 @@ header img.logo {
     margin-left: 15px;
 }
 
+#index-text {
+    margin-left: 15px;
+}
+
 nav ul {
     list-style: none;
     padding: 0;

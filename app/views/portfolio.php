@@ -40,13 +40,23 @@ $projects = $init->getProjects(); // Haal projecten op in view
     </nav>
 </header>
 
+<h1 id="index-text">Welkom, <?php if(isset($_SESSION['user_id'])){
+        echo explode(" ", $_SESSION['first_name'])[0];
+    }else{
+        echo 'Bezoeker';
+    }
+    ?> </h1>
+
 <main>
+    <div id="add-project-container">
     <?php if (isset($_SESSION['user_id'])): ?>
     <!-- Knop om een nieuw project toe te voegen -->
     <button id="open-add-project-modal" class="btn">Project Toevoegen</button>
     <?php else: ?>
-    <p>Je moet ingelogd zijn om een project aan te kunnen maken</p>
+    <p id="add-project-text">Je moet ingelogd zijn om een project aan te kunnen maken</p>
+        <a href="../views/login.php" class="btn">Inloggen</a>
     <?php endif; ?>
+    </div>
 
     <!--Modal voor het aanmaken van een project-->
     <div id="add-project-modal" class="modal">

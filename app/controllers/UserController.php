@@ -95,6 +95,7 @@ class UserController {
 
     public function createUserSession($user) {
         $_SESSION['user_id'] = $user->id;
+        $_SESSION['first_name'] = $user->first_name;
         $_SESSION['email'] = $user->email;
 
         echo "Session created with user_id: " . $_SESSION['user_id'] . "<br>";
@@ -103,6 +104,7 @@ class UserController {
 
     public function logout() {
         unset($_SESSION['user_id']);
+        unset($_SESSION['first_name']);
         unset($_SESSION['email']);
         session_destroy();
         redirect("../views/home.php");
