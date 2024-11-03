@@ -26,9 +26,9 @@
             <li><a href="../views/about.php" id="about">About</a></li>
             <li><a href="../views/contact.php" id="contact">Contact</a></li>
 
-            <?php if (isset($_SESSION['users_id'])): ?>
+            <?php if (isset($_SESSION['user_id'])): ?>
                 <li><a href="#" id="profile" class="profile-btn">Mijn Profiel</a></li>
-                <li><a href="../controllers/LoginController.php?q=logout">Logout</a></li>
+                <li><a href="../controllers/UserController.php?q=logout">Logout</a></li>
             <?php else: ?>
                 <li><a href="login.php" id="login">Login</a></li>
                 <li><a href="../views/register.php" id="register">Register</a></li>
@@ -43,7 +43,7 @@
         <!-- Register Sectie -->
         <section id="register-section">
             <h2>Registreren</h2>
-            <form action="../controllers/LoginController.php" method="post">
+            <form action="../controllers/UserController.php" method="post">
                 <input type="hidden" name="type" value="register"/>
                 <label for="first_name">Voornaam:</label>
                 <input type="text" name="first_name" id="first_name" required>

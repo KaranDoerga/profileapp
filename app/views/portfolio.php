@@ -1,6 +1,10 @@
 <?php
 session_start();
-require_once "../models/Project.php"
+
+use controllers\PortfolioController;
+
+include_once "../controllers/PortfolioController.php"
+
 ?>
 
 
@@ -24,9 +28,9 @@ require_once "../models/Project.php"
             <li><a href="../views/about.php" id="about">About</a></li>
             <li><a href="../views/contact.php" id="contact">Contact</a></li>
 
-            <?php if (isset($_SESSION['users_id'])): ?>
+            <?php if (isset($_SESSION['user_id'])): ?>
                 <li><a href="#" id="profile" class="profile-btn">Mijn Profiel</a></li>
-                <li><a href="../controllers/LoginController.php?q=logout">Logout</a></li>
+                <li><a href="../controllers/UserController.php?q=logout">Logout</a></li>
             <?php else: ?>
                 <li><a href="login.php" id="login">Login</a></li>
                 <li><a href="../views/register.php" id="register">Register</a></li>
@@ -38,11 +42,12 @@ require_once "../models/Project.php"
 <main>
     <section>
         <h1>Portfolio's</h1>
-
         <!--Lijst van projecten-->
         <div class="project-list">
+            <?php $portfolioController = new PortfolioController();
+            $projects = $portfolioController->getProjects()?>
             <?php if (!empty($projects)): ?>
-                <?php foreach ($projects as $project): ?>
+                    <?php foreach ($projects as $project): ?>
                     <div class='project-item'>
                         <img src='<?= $project['link_image']; ?>' alt='<?= $project['title']; ?>'>
                         <h3><?= $project['title']; ?></h3>
@@ -50,14 +55,14 @@ require_once "../models/Project.php"
                         <p>Programmeertaal: <?= $project['pro_lang']; ?></p>
                         <button class='view-details-btn' data-project-id='<?= $project['id']; ?>'>Bekijk Details</button>
                     </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
             <?php else: ?>
                 <p>Geen projecten gevonden.</p>
             <?php endif; ?>
         </div>
     </section>
 
-    <?php if (isset($_SESSION['users_id'])): ?>
+    <?php if (isset($_SESSION['user_id'])): ?>
     <!-- Knop om een nieuw project toe te voegen -->
     <button id="open-add-project-modal" class="btn">Project Toevoegen</button>
     <?php else: ?>
@@ -69,13 +74,13 @@ require_once "../models/Project.php"
         <div class="modal-content">
             <span class="close" id="close-add-project">&times;</span>
             <h2>Nieuw project aanmaken</h2>
-            <form id="add-project-form" action="../controllers/PortfolioController.php" method="post" enctype="multipart/form-data">
+            <form id="add-project-form" action="../controllers/PortfolioController.php" method="post">
                 <input type="hidden" name="type" value="project">
                 <label for="title">Titel</label>
                 <input type="text" id="title" name="title" required>
 
-                <label for="description">Beschrijving</label>
-                <textarea id="description" name="description" required></textarea>
+                <label for="beschrijving">Beschrijving</label>
+                <textarea id="beschrijving" name="beschrijving" required></textarea>
 
                 <label for="pro_lang">Programmeertalen</label>
                 <select name="pro_lang" id="pro_lang" required>
@@ -90,7 +95,7 @@ require_once "../models/Project.php"
                 </select>
 
                 <label for="image">Afbeelding uploaden</label>
-                <input type="file" id="image" name="image">
+                <input type="file" id="image" name="link_image">
 
                 <button class="btn" type="submit">Project aanmaken</button>
             </form>
@@ -102,7 +107,7 @@ require_once "../models/Project.php"
         <div class="modal-content">
             <span class="close" id="close-project-detail">&times;</span>
             <h2 id="modal-title">Project Titel</h2>
-            <p id="modal-description">Project beschrijving...</p>
+            <p id="modal-beschrijving">Project beschrijving...</p>
             <p id="modal-pro_lang">Programmeertalen</p>
             <img id="modal-image" src="" alt="Project Afbeelding">
         </div>

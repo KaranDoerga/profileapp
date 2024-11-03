@@ -17,17 +17,27 @@ class PortfolioController{
 
     public function getProjects(){
         $projects = $this->projectModel->getProjects();
-        require_once "../views/portfolio.php";
+
+        return include_once "../views/portfolio.php";
     }
 
     public function addProject() {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
 
+        if (!empty($_FILES["link_image"]["name"])) {
+            $target_dir = "public/images/";
+            $target_file = $target_dir . basename($_FILES["link_image"]["name"]);
+            move_uploaded_file($_FILES["link_image"]["tmp_name"], $target_file);
+            $imagePath = $target_file;
+        } else {
+            $imagePath = "public/images/no-image.jpg";
+        }
+
         $data = [
-            'users_id' => trim($_SESSION['users_id']),
+            'user_id' => $_SESSION['user_id'],
             'title' => trim($_POST['title']),
             'beschrijving' => trim($_POST['beschrijving']),
-            'link_image' => trim($_POST['link_image']),
+            'link_image' => $imagePath,
             'pro_lang' => trim($_POST['pro_lang']),
         ];
 
@@ -48,7 +58,7 @@ class PortfolioController{
 
 $init = new PortfolioController();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['type'] == 'project') {
     $init->addProject();
 } else {
     $init->getProjects();

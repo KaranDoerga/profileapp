@@ -7,7 +7,7 @@ use models\User;
 require_once '../models/User.php';
 require_once '../helpers/helper.php';
 
-class LoginController {
+class UserController {
 
     private $userModel;
 
@@ -94,22 +94,22 @@ class LoginController {
     }
 
     public function createUserSession($user) {
-        $_SESSION['users_id'] = $user->id;
+        $_SESSION['user_id'] = $user->id;
         $_SESSION['email'] = $user->email;
 
-        echo "Session created with user_id: " . $_SESSION['users_id'] . "<br>";
+        echo "Session created with user_id: " . $_SESSION['user_id'] . "<br>";
         redirect("../views/home.php");
     }
 
     public function logout() {
-        unset($_SESSION['users_id']);
+        unset($_SESSION['user_id']);
         unset($_SESSION['email']);
         session_destroy();
         redirect("../views/home.php");
     }
 }
 
-$init = new LoginController();
+$init = new UserController();
 
 // Ensure that user is sending a post request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

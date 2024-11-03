@@ -27,7 +27,7 @@ class Model {
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->password, $options);
             // Optioneel: Echo voor debuggen
-            echo "Database connection successful!";
+//            echo "Database connection successful!";
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
             // Optioneel: Echo foutmelding

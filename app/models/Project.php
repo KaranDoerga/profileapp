@@ -13,11 +13,11 @@ class Project {
     }
 
     public function createProject($data) {
-        $this->db->query("INSERT INTO Projecten (users_id, title, beschrijving, link_image, pro_lang) 
-        VALUES (:users_id, :title, :beschrijving, :link_image, :pro_lang)");
+        $this->db->query("INSERT INTO projecten (user_id, title, beschrijving, link_image, pro_lang) 
+        VALUES (:user_id, :title, :beschrijving, :link_image, :pro_lang)");
 
         // Bind values
-        $this->db->bind(':users_id', $data['users_id']);
+        $this->db->bind(':user_id', $data['user_id']);
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':beschrijving', $data['beschrijving']);
         $this->db->bind(':link_image', $data['link_image']);
@@ -32,7 +32,7 @@ class Project {
     }
 
     public function getProjects() {
-        $this->db->query("SELECT * FROM Projecten");
+        $this->db->query("SELECT * FROM projecten");
 
         $row = $this->db->resultSet();
 
@@ -42,18 +42,4 @@ class Project {
             return false;
         }
     }
-
-//    public function getProjectByUser($user_id) {
-//        $sql = "SELECT * FROM Projecten WHERE user_id = ?";
-//        $stmt = $this->db->prepare($sql);
-//        $stmt->execute([$user_id]);
-//        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-//    }
-//
-//    public function getProjectById($id) {
-//        $sql = "SELECT * FROM Projecten WHERE id = ?";
-//        $stmt = $this->db->prepare($sql);
-//        $stmt->execute([$id]);
-//        return $stmt->fetch(PDO::FETCH_ASSOC);
-//    }
 }
