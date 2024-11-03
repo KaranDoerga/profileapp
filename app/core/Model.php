@@ -73,7 +73,7 @@ class Model {
     // Return multiple records
     public function resultSet() {
         $this->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Return a single record

@@ -17,8 +17,7 @@ class PortfolioController{
 
     public function getProjects(){
         $projects = $this->projectModel->getProjects();
-
-        return include_once "../views/portfolio.php";
+        return $projects;
     }
 
     public function addProject() {

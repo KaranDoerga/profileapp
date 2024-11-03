@@ -29,7 +29,6 @@ include_once '../helpers/helper.php';
                 <li><a href="login.php" id="login">Login</a></li>
                 <li><a href="../views/register.php" id="register">Register</a></li>
             <?php else: ?>
-                <li><a href="#" id="profile" class="profile-btn">Mijn Profiel</a></li>
                 <li><a href="../controllers/UserController.php?q=logout">Logout</a></li>
             <?php endif; ?>
         </ul>

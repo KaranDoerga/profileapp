@@ -115,7 +115,7 @@ footer {
     background-image: linear-gradient(to right, #829ae8, #e2ccf8);
     color: black;
     padding: 10px 0;
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
 }

@@ -27,7 +27,6 @@
             <li><a href="../views/contact.php" id="contact">Contact</a></li>
 
             <?php if (isset($_SESSION['user_id'])): ?>
-                <li><a href="#" id="profile" class="profile-btn">Mijn Profiel</a></li>
                 <li><a href="../controllers/UserController.php?q=logout">Logout</a></li>
             <?php else: ?>
                 <li><a href="login.php" id="login">Login</a></li>

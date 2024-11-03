@@ -1,62 +1,58 @@
 //script.js
 
-//Open en sluit de add-project-modal
-document.getElementById('open-add-project-modal').addEventListener('click', function () {
-    document.getElementById('add-project-modal').style.display = 'flex';
-});
-
-document.getElementById('close-add-project').addEventListener('click', function () {
-    document.getElementById('add-project-modal').style.display = 'none';
-})
 
 //Voor project details
-document.querySelector('.view-details-btn').forEach(function (button) {
-    button.addEventListener('click', function () {
-        const projectId = this.getAttribute('data-project-id');
-        const projectData = JSON.parse(document.getElementById('project-data').textContent)[projectId];
+document.addEventListener('DOMContentLoaded', () => {
+    // Haal de data van de script tag
+    const projectData = JSON.parse(document.getElementById('project-data').textContent);
 
-        //Debugging - print projectData om te zien of image aanwezig is
-        console.log(projectData);
+    // Elementen voor de modal
+    const modal = document.getElementById('project-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalImage = document.getElementById('modal-image');
+    const modalDescription = document.getElementById('modal-description');
+    const modalLanguage = document.getElementById('modal-language');
+    const closeModalButton = document.getElementById('close-modal')
 
-        //Vul modal met projectgegevens
-        document.getElementById('modal-title').innerText = projectData.title;
-        document.getElementById('modal-description').innerText = projectData.description;
+    const detailButtons = document.querySelectorAll('.view-details')
+    detailButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const projectId = parseInt(button.getAttribute('data-id'));
+            const project = projectData.find(p => p.id === projectId);
+            console.log('Data ID van de knop:', projectId);
+            console.log('ID-waarden in projectData:', projectData.map(p => p.id));
 
-        //Controleer of projectData een image heeft
-        if (projectData.image) {
-            document.getElementById('modal-image').src = projectData.image;
-        } else {
-            console.log("Afbeelding niet gevonden voor project", projectId);
-            document.getElementById('modal-image').src = "public/images/no-image.jpg";
-        }
+            if (project) {
+                // Vul de modal met de projectgegevens
+                modalTitle.textContent = project.title;
+                modalImage.src = project.link_image;
+                modalImage.alt = project.title
+                modalDescription.textContent = project.beschrijving;
+                modalLanguage.textContent = project.pro_lang;
 
-        //Toon de modal
-        document.getElementById('project-detail-modal').style.display = 'flex';
+                modal.style.display = 'flex';
+            }
+        })
     })
-})
-document.getElementById('close-project-detail').addEventListener('click', function () {
-    document.getElementById('project-detail-modal').style.display = 'none';
-})
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Profiel modal functionaliteit
-    const profileBtn = document.querySelector('.profile-btn');
-    const profileModal = document.getElementById('profile-modal');
-    const closeProfileModal = document.getElementById('close-profile-modal');
-
-    if (profileBtn) {
-        profileBtn.addEventListener('click', function () {
-            profileModal.style.display = 'flex';
-        });
-    }
-
-    closeProfileModal.addEventListener('click', function () {
-        profileModal.style.display = 'none';
+    // Sluit modal wanneer op de sluitknop wordt geklikt
+    closeModalButton.addEventListener('click', () => {
+        modal.style.display = 'none';
     });
 
-    window.addEventListener('click', function (event) {
-        if (event.target === profileModal) {
-            profileModal.style.display = 'none';
+    // Sluit modal wanneer er buiten het venster wordt geklikt
+    window.addEventListener('click', () => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
         }
     })
-})
+
+//Open en sluit de add-project-modal
+    document.getElementById('open-add-project-modal').addEventListener('click', function () {
+        document.getElementById('add-project-modal').style.display = 'flex';
+    });
+
+    document.getElementById('close-add-project').addEventListener('click', function () {
+        document.getElementById('add-project-modal').style.display = 'none';
+    })
+});

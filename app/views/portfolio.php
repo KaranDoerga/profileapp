@@ -3,7 +3,9 @@ session_start();
 
 use controllers\PortfolioController;
 
-include_once "../controllers/PortfolioController.php"
+require_once "../controllers/PortfolioController.php";
+$init = new PortfolioController();
+$projects = $init->getProjects(); // Haal projecten op in view
 
 ?>
 
@@ -29,7 +31,6 @@ include_once "../controllers/PortfolioController.php"
             <li><a href="../views/contact.php" id="contact">Contact</a></li>
 
             <?php if (isset($_SESSION['user_id'])): ?>
-                <li><a href="#" id="profile" class="profile-btn">Mijn Profiel</a></li>
                 <li><a href="../controllers/UserController.php?q=logout">Logout</a></li>
             <?php else: ?>
                 <li><a href="login.php" id="login">Login</a></li>
@@ -40,28 +41,6 @@ include_once "../controllers/PortfolioController.php"
 </header>
 
 <main>
-    <section>
-        <h1>Portfolio's</h1>
-        <!--Lijst van projecten-->
-        <div class="project-list">
-            <?php $portfolioController = new PortfolioController();
-            $projects = $portfolioController->getProjects()?>
-            <?php if (!empty($projects)): ?>
-                    <?php foreach ($projects as $project): ?>
-                    <div class='project-item'>
-                        <img src='<?= $project['link_image']; ?>' alt='<?= $project['title']; ?>'>
-                        <h3><?= $project['title']; ?></h3>
-                        <p><?= $project['beschrijving']; ?></p>
-                        <p>Programmeertaal: <?= $project['pro_lang']; ?></p>
-                        <button class='view-details-btn' data-project-id='<?= $project['id']; ?>'>Bekijk Details</button>
-                    </div>
-                    <?php endforeach; ?>
-            <?php else: ?>
-                <p>Geen projecten gevonden.</p>
-            <?php endif; ?>
-        </div>
-    </section>
-
     <?php if (isset($_SESSION['user_id'])): ?>
     <!-- Knop om een nieuw project toe te voegen -->
     <button id="open-add-project-modal" class="btn">Project Toevoegen</button>
@@ -102,14 +81,30 @@ include_once "../controllers/PortfolioController.php"
         </div>
     </div>
 
-    <!--Modal voor het laten zien van de project details-->
-    <div id="project-detail-modal" class="modal">
+    <!-- Lijst met alle projecten-->
+    <?php if (isset($projects) && is_array($projects)): ?>
+    <div class="project-container">
+        <?php foreach ($projects as $project): ?>
+        <div class="project-details">
+            <h3><?php echo htmlspecialchars($project['title']); ?></h3>
+            <img src="/<?php echo htmlspecialchars($project['link_image']); ?>" alt="<?php echo htmlspecialchars($project['title']); ?>" class="project-image">
+            <p><?php echo htmlspecialchars($project['beschrijving']); ?></p>
+            <button class="btn view-details" data-id="<?php echo $project['id']; ?>">Bekijk details</button>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <?php else: ?>
+        <p>Er zijn nog geen projecten toegevoegd.</p>
+    <?php endif; ?>
+
+    <!-- Modal voor projectdetails -->
+    <div id="project-modal" class="modal" style="display:none;">
         <div class="modal-content">
-            <span class="close" id="close-project-detail">&times;</span>
-            <h2 id="modal-title">Project Titel</h2>
-            <p id="modal-beschrijving">Project beschrijving...</p>
-            <p id="modal-pro_lang">Programmeertalen</p>
-            <img id="modal-image" src="" alt="Project Afbeelding">
+            <span class="close" id="close-modal">&times;</span>
+            <h2 id="modal-title"></h2>
+            <img id="modal-image" src="" alt="Project Image" class="modal-image">
+            <p id="modal-description"></p>
+            <p><strong>Programmeertaal:</strong> <span id="modal-language"></span></p>
         </div>
     </div>
 </main>
@@ -123,8 +118,8 @@ include_once "../controllers/PortfolioController.php"
 </footer>
 
 <!-- Link naar extern JavaScript-bestand -->
-<script src="/public/js/script.js"></script>
 <script id="project-data" type="application/json"><?php echo json_encode($projects); ?></script>
+<script src="/public/js/script.js"></script>
 
 
 </body>
