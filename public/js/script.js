@@ -53,3 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('add-project-modal').style.display = 'none';
     })
 });
+
+function toggleMenu() {
+    const nav = document.querySelector("nav ul");
+    nav.classList.toggle("active");
+}

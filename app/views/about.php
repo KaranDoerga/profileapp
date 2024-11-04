@@ -15,6 +15,11 @@ session_start();
 
 <header>
     <img src="/public/images/images.png" alt="Logo" class="logo">
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
     <nav>
         <ul>
             <li><a href="../views/home.php" id="home">Home</a></li>
@@ -64,6 +69,8 @@ session_start();
         <li>© 2024 Karan Doerga</li>
     </ul>
 </footer>
+
+<script src="/public/js/script.js"></script>
 
 </body>
 </html>
