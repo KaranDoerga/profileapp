@@ -10,7 +10,6 @@ include_once '../helpers/helper.php';
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/public/css/style.css">
-    <link rel="stylesheet" href="/public/css/auth.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
@@ -50,20 +49,15 @@ include_once '../helpers/helper.php';
                 <input type="password" name="password" id="password" required>
 
                 <button type="submit" name="login" class="btn">Inloggen</button>
-
-                <?php if (isset($error)): ?>
-                    <p class="error-message"><?= $error ?></p>
-                <?php endif; ?>
             </form>
         </section>
     </div>
+    <a href="../views/register.php">Heb je nog geen account? Registreer je.</a>
 </main>
 
 <footer>
     <ul class="footer-list">
         <li>© 2024 Karan Doerga</li>
-        <li>Windesheim</li>
-        <li>Student: s1217356</li>
     </ul>
 </footer>
 

@@ -14,7 +14,6 @@ $projects = $init->getProjects(); // Haal projecten op in view
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/public/css/style.css">
-    <link rel="stylesheet" href="/public/css/portfolio.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
@@ -60,10 +59,10 @@ $projects = $init->getProjects(); // Haal projecten op in view
 
     <!--Modal voor het aanmaken van een project-->
     <div id="add-project-modal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" id="add-project-modal-content">
             <span class="close" id="close-add-project">&times;</span>
             <h2>Nieuw project aanmaken</h2>
-            <form id="add-project-form" action="../controllers/PortfolioController.php" method="post">
+            <form id="add-project-form" action="../controllers/PortfolioController.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="type" value="project">
                 <label for="title">Titel</label>
                 <input type="text" id="title" name="title" required>
@@ -71,21 +70,30 @@ $projects = $init->getProjects(); // Haal projecten op in view
                 <label for="beschrijving">Beschrijving</label>
                 <textarea id="beschrijving" name="beschrijving" required></textarea>
 
-                <label for="pro_lang">Programmeertalen</label>
-                <select name="pro_lang" id="pro_lang" required>
-                    <option value="python">Python</option>
-                    <option value="javascript">Javascript</option>
-                    <option value="java">Java</option>
-                    <option value="c#">C#</option>
-                    <option value="ruby">Ruby</option>
-                    <option value="php">PHP</option>
-                    <option value="c++">C++</option>
-                    <option value="go">Go</option>
+                <label for="category">Sector</label>
+                <select name="category" id="category" required>
+                    <option value=""></option>
+                    <option value="IT">IT</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Financiën">Financiën</option>
+                    <option value="HR">HR</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Gezondheidszorg">Gezondheidszorg</option>
+                    <option value="Onderwijs">Onderwijs</option>
+                    <option value="Bouw">Bouw</option>
+                    <option value="Consultancy">Consultancy</option>
+                    <option value="Juridisch">Juridisch</option>
+                    <option value="Verkoop">Verkoop</option>
+                    <option value="Creatief">Creatief</option>
+                    <option value="Logistiek">Logistiek</option>
+                    <option value="Horeca">Horeca</option>
+                    <option value="Productie">Productie</option>
+                    <option value="Onderzoek">Onderzoek</option>
+                    <option value="Publieke Sector">Publieke Sector</option>
+                    <option value="Vastgoed">Vastgoed</option>
+                    <option value="Klantenservice">Klantenservice</option>
+                    <option value="Detailhandel">Detailhandel</option>
                 </select>
-
-                <label for="image">Afbeelding uploaden</label>
-                <input type="file" id="image" name="link_image">
-
                 <button class="btn" type="submit">Project aanmaken</button>
             </form>
         </div>
@@ -97,7 +105,6 @@ $projects = $init->getProjects(); // Haal projecten op in view
         <?php foreach ($projects as $project): ?>
         <div class="project-details">
             <h3><?php echo htmlspecialchars($project['title']); ?></h3>
-            <img src="/<?php echo htmlspecialchars($project['link_image']); ?>" alt="<?php echo htmlspecialchars($project['title']); ?>" class="project-image">
             <p><?php echo htmlspecialchars($project['beschrijving']); ?></p>
             <button class="btn view-details" data-id="<?php echo $project['id']; ?>">Bekijk details</button>
         </div>
@@ -109,12 +116,11 @@ $projects = $init->getProjects(); // Haal projecten op in view
 
     <!-- Modal voor projectdetails -->
     <div id="project-modal" class="modal" style="display:none;">
-        <div class="modal-content">
+        <div class="modal-content" id="project-modal-content">
             <span class="close" id="close-modal">&times;</span>
             <h2 id="modal-title"></h2>
-            <img id="modal-image" src="" alt="Project Image" class="modal-image">
             <p id="modal-description"></p>
-            <p><strong>Programmeertaal:</strong> <span id="modal-language"></span></p>
+            <p><strong>Sector:</strong> <span id="modal-language"></span></p>
         </div>
     </div>
 </main>
@@ -122,8 +128,6 @@ $projects = $init->getProjects(); // Haal projecten op in view
 <footer>
     <ul class="footer-list">
         <li>© 2024 Karan Doerga</li>
-        <li>Windesheim</li>
-        <li>Student: s1217356</li>
     </ul>
 </footer>
 

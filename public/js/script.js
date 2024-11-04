@@ -1,7 +1,7 @@
 //script.js
 
 
-//Voor project details
+// Project gegevens in de modal zetten
 document.addEventListener('DOMContentLoaded', () => {
     // Haal de data van de script tag
     const projectData = JSON.parse(document.getElementById('project-data').textContent);
@@ -9,9 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Elementen voor de modal
     const modal = document.getElementById('project-modal');
     const modalTitle = document.getElementById('modal-title');
-    const modalImage = document.getElementById('modal-image');
     const modalDescription = document.getElementById('modal-description');
-    const modalLanguage = document.getElementById('modal-language');
+    const modalCategory = document.getElementById('modal-language');
     const closeModalButton = document.getElementById('close-modal')
 
     const detailButtons = document.querySelectorAll('.view-details')
@@ -25,10 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (project) {
                 // Vul de modal met de projectgegevens
                 modalTitle.textContent = project.title;
-                modalImage.src = project.link_image;
-                modalImage.alt = project.title
                 modalDescription.textContent = project.beschrijving;
-                modalLanguage.textContent = project.pro_lang;
+                modalCategory.textContent = project.category;
 
                 modal.style.display = 'flex';
             }

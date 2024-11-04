@@ -23,25 +23,15 @@ class PortfolioController{
     public function addProject() {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
 
-        if (!empty($_FILES["link_image"]["name"])) {
-            $target_dir = "public/images/";
-            $target_file = $target_dir . basename($_FILES["link_image"]["name"]);
-            move_uploaded_file($_FILES["link_image"]["tmp_name"], $target_file);
-            $imagePath = $target_file;
-        } else {
-            $imagePath = "public/images/no-image.jpg";
-        }
-
         $data = [
             'user_id' => $_SESSION['user_id'],
             'title' => trim($_POST['title']),
             'beschrijving' => trim($_POST['beschrijving']),
-            'link_image' => $imagePath,
-            'pro_lang' => trim($_POST['pro_lang']),
+            'category' => trim($_POST['category']),
         ];
 
         // Validate inputs
-        if (empty($data['title']) || empty($data['beschrijving']) || empty($data['link_image'])) {
+        if (empty($data['title']) || empty($data['beschrijving'])) {
             alert("portfolio", "Vul alle velden in!");
             redirect("../views/portfolio.php");
         }

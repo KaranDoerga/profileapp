@@ -65,8 +65,6 @@ session_start();
 <footer>
     <ul class="footer-list">
         <li>© 2024 Karan Doerga</li>
-        <li>Windesheim</li>
-        <li>Student: s1217356</li>
     </ul>
 </footer>
 
