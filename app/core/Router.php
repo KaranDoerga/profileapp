@@ -12,7 +12,7 @@ class Router {
 
     // Verwerk de route
     public function route() {
-        $requestedUrl = $_SERVER['REQUEST_URI'];
+        $requestedUrl = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
         // Controleer of de gevraagde URL bestaat in de routes
         if (isset($this->routes[$requestedUrl])) {
@@ -22,7 +22,7 @@ class Router {
             $method = $action[1];
 
             // Include de controller en roep de methode aan
-            require_once '../app/controllers/' . $controller . '.php';
+            require_once 'app/controllers/' . $controller . '.php';
             $controllerInstance = new $controller();
             $controllerInstance->$method();
         } else {
