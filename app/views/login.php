@@ -2,9 +2,9 @@
 session_start();
 //var_dump($_SESSION);
 
-include_once '../helpers/helper.php';
+include_once __DIR__ . '/../helpers/helper.php';
 
-require '../views/layout/header.php'
+require __DIR__ . '/layout/header.php';
 ?>
 
 <main>
@@ -25,9 +25,9 @@ require '../views/layout/header.php'
             </form>
         </section>
     </div>
-    <a href="../views/register.php">Heb je nog geen account? Registreer je.</a>
+    <a href="/register">Heb je nog geen account? Registreer je.</a>
 </main>
 
 <?php
-require '../views/layout/footer.php'
+require __DIR__ . '/layout/footer.php';
 ?>

@@ -1,9 +1,9 @@
 <?php
     session_start();
 
-    include_once '../helpers/helper.php';
+    include_once __DIR__ . '/../helpers/helper.php';
 
-    require '../views/layout/header.php'
+    require __DIR__ . '/layout/header.php';
 
 ?>
 
@@ -35,5 +35,5 @@
 </main>
 
 <?php
-require '../views/layout/footer.php'
+require __DIR__ . '/layout/footer.php';
 ?>
