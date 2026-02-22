@@ -23,7 +23,10 @@ class Router {
 
             // Include de controller en roep de methode aan
             require_once 'app/controllers/' . $controller . '.php';
-            $controllerInstance = new $controller();
+
+            // Add namespace prefix for controllers
+            $controllerClass = 'controllers\\' . $controller;
+            $controllerInstance = new $controllerClass();
             $controllerInstance->$method();
         } else {
             echo "404 - Pagina niet gevonden";
