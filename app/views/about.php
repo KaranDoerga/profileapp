@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require '../views/layout/header.php'
+require __DIR__ . '/layout/header.php';
 ?>
 
 <main>
@@ -25,5 +25,5 @@ require '../views/layout/header.php'
 </main>
 
 <?php
-require '../views/layout/footer.php'
+require __DIR__ . '/layout/footer.php';
 ?>

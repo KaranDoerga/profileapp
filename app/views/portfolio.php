@@ -3,11 +3,11 @@ session_start();
 
 use controllers\PortfolioController;
 
-require_once "../controllers/PortfolioController.php";
+require_once __DIR__ . "/../controllers/PortfolioController.php";
 $init = new PortfolioController();
 $projects = $init->getProjects(); // Haal projecten op in view
 
-require '../views/layout/header.php'
+require __DIR__ . '/layout/header.php';
 ?>
 
 <main>
@@ -17,7 +17,7 @@ require '../views/layout/header.php'
     <button id="open-add-project-modal" class="btn">Project Toevoegen</button>
     <?php else: ?>
     <p id="add-project-text">Je moet ingelogd zijn om een project aan te kunnen maken</p>
-        <a href="../views/login.php" class="btn">Inloggen</a>
+        <a href="/login" class="btn">Inloggen</a>
     <?php endif; ?>
     </div>
 
@@ -92,5 +92,5 @@ require '../views/layout/header.php'
 <script id="project-data" type="application/json"><?php echo json_encode($projects); ?></script>
 
 <?php
-require '../views/layout/footer.php'
+require __DIR__ . '/layout/footer.php';
 ?>
